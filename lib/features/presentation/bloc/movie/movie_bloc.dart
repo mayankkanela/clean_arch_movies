@@ -41,8 +41,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
         if (list != null) {
           list!.add(MovieModel(
               title: event.movie.title,
-              director: event.movie.title,
-              imagePath: event.movie.title));
+              director: event.movie.director,
+              imagePath: event.movie.imagePath));
           final dataOrError = await _addMovie(AddMovieParams(movies: list!));
           emit(dataOrError.fold(
               (l) => const ErrorState(message: 'Something went wrong.'),
@@ -57,8 +57,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
         if (list != null) {
           list![event.index] = MovieModel(
               title: event.movie.title,
-              director: event.movie.title,
-              imagePath: event.movie.title);
+              director: event.movie.director,
+              imagePath: event.movie.imagePath);
           final dataOrError = await _editMovie(EditMovieParams(movies: list!));
           emit(dataOrError.fold(
               (l) => const ErrorState(message: 'Something went wrong.'),
